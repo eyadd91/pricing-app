@@ -6,8 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const xlsx = require('xlsx');
-const bcrypt = require('bcrypt');
-
+const bcrypt = require("bcryptjs");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const USERS_FILE = path.join(__dirname, 'users.json');
