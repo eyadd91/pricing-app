@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تسجيل الدخول</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container card">
+    <h2>تسجيل الدخول</h2>
+    <div class="row">
+      <label>اسم المستخدم</label>
+      <input id="username" type="text" />
+    </div>
+    <div class="row">
+      <label>كلمة المرور</label>
+      <input id="password" type="password" />
+    </div>
+    <button id="btnLogin">دخول</button>
+    <div id="loginResult" class="result"></div>
+  </div>
+
+  <script>
+    document.getElementById("btnLogin").addEventListener("click", async () => {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const resp = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (resp.ok) {
+        window.location.href = "index.html"; // بعد النجاح ننتقل للبرنامج
+      } else {
+        const err = await resp.json();
+        document.getElementById("loginResult").innerText = err.error;
+      }
+    });
+  </script>
+</body>
+</html>
